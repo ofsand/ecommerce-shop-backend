@@ -26,7 +26,7 @@ app.use(morgan('tiny'));
 //Router
 app.use(`${api}/products`, productRouter);
 app.use(`${api}/categories`, categoryRouter);
-app.use(`${api}/user`, userRouter);
+app.use(`${api}/users`, userRouter);
 //app.use(`${api}/review`, reviewRouter);
 
 

@@ -24,12 +24,12 @@ router.post(`/`, async (req, res) => {
      })
      
      //console.log('Product: '+product);
-     product = await product.save();
+     user = await user.save();
  
-     if(!product) 
-         res.status(500).json("Product can't be created");
+     if(!user) 
+         res.status(500).json("User can't be created");
  
-         res.send(product);
+         res.send(user);
  })
 
 
