@@ -47,7 +47,7 @@ router.post(`/`, async (req, res) => {
 //Update user
 //We use here isvalidObjectId to catch Error of not existing Id (this is an alternative way of catch in the promise way)
 router.put('/:id', async (req, res) => {
-    const userExist = await User.findById(req.body.id);
+    const userExist = await User.findById(req.params.id);
     let newPassword;
     if(req.body.password){
         newPassword = bcrypt.hashSync(req.body.password, 10);
