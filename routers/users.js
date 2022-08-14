@@ -3,13 +3,24 @@ const { User } = require("../models/user");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 
+//Get all users
 router.get('/', async (req, res) => {
-    const usersList = await User.find();
+    const usersList = await User.find().select('-passwordHash');
 
     if(!usersList) {
         res.status(500).json({success: false})
     }
     res.send(usersList);
+})
+
+//Get a User
+router.get('/:id', async (req, res) => {
+    const user = await User.findById(req.params.id).select('-passwordHash');
+
+    if(!user) {
+        res.status(500).json({success: false});
+    }
+    res.send((user));
 })
 
 //Create User
