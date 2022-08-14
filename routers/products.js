@@ -18,6 +18,7 @@ router.get(`/`, async (req, res) => {
     }
     res.send(productList);
 })
+
 //Get a product
 router.get('/:id', async (req, res) => {
     const product = await Product.findById(req.params.id).populate('category');
