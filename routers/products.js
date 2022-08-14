@@ -2,6 +2,7 @@ const express = require('express');
 const { Category } = require('../models/category');
 const { Product } = require('../models/product');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 router.get(`/`, async (req, res) => {
     const productList = await Product.find().select('name image _id');
@@ -53,7 +54,11 @@ router.post(`/`, async (req, res) => {
 })
 
 //Update product
+//We use here isvalidObjectId to catch Error of not existing Id (this is an alternative way of catch in the promise way)
 router.put('/:id', async (req, res) => {
+    if(!mongoose.isValidObjectId(req.params.id)) {
+        res.status(400).send('Invalid Product ID')
+    }
     const category = await Category.findById(req.body.category);
     if(!category)
          return res.status(400).send('Invalid Category')
@@ -85,11 +90,12 @@ router.put('/:id', async (req, res) => {
 })
 
 //Delete product
+//The promise way allow catching Error of product not found
 router.delete('/:id', (req, res) => {
     Product.findByIdAndDelete(req.params.id)
         .then((product) => {
             if(product){
-                return res.status(200).json({success: true, message: 'The category is been deleted !'})
+                return res.status(200).json({success: true, message: 'The product is been deleted !'})
             }
             return res.status(404).json({success: false, name:'The product can not be found'})
         })
