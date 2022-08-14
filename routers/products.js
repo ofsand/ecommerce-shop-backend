@@ -4,8 +4,15 @@ const { Product } = require('../models/product');
 const router = express.Router();
 const mongoose = require('mongoose');
 
+
+//Get all and get with Filter by category
 router.get(`/`, async (req, res) => {
-    const productList = await Product.find().select('name image _id');
+    let categoryFilter = {};
+    if(req.query.categories) {
+        categoryFilter = {category: req.query.categories.split(',')};
+    }
+    //Select is used to specify only some attributes!
+    const productList = await Product.find(categoryFilter).select('name image _id').populate('category');
     if(!productList) {
         res.status(500).json({success: false})
     }
