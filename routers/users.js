@@ -11,4 +11,26 @@ router.get('/', async (req, res) => {
     res.send(usersList);
 })
 
+//Create User
+router.post(`/`, async (req, res) => {
+     let user = new User({
+         name: req.body.name,
+         email: req.body.email,
+         passwordHash: req.body.passwordHash,
+         phone: req.body.phone,
+         adress: req.body.adress,
+         city: req.body.city,
+         isAdmin: req.body.isAdmin,
+     })
+     
+     //console.log('Product: '+product);
+     product = await product.save();
+ 
+     if(!product) 
+         res.status(500).json("Product can't be created");
+ 
+         res.send(product);
+ })
+
+
 module.exports = router;
