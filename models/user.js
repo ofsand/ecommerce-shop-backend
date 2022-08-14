@@ -36,11 +36,11 @@ const userSchema = mongoose.Schema({
 })
 
 //changing _id to id (removing the underscore) Using Virtuals
-productSchema.virtual('id').get(function () {
+userSchema.virtual('id').get(function () {
     return this._id.toHexString();
 });
 
-productSchema.set('toJSON', {
+userSchema.set('toJSON', {
     virtuals: true
 });
 
