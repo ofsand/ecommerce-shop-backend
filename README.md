@@ -3,7 +3,7 @@
 
 ### it is an E-commerce Website includes:
 #### Authentication
-  #####   -Regiter users
+  #####-Regiter users
   #####   -modify user's infos
   #####   -delete users
 #### REST APIs
