@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
     },
     passwordHash: {
         type: String,
-        required: true,
+        required: false,
     },
     phone: {
         type: String,
