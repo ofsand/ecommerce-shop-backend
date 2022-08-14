@@ -44,5 +44,35 @@ router.post(`/`, async (req, res) => {
          res.send(user);
  })
 
+//Update user
+//We use here isvalidObjectId to catch Error of not existing Id (this is an alternative way of catch in the promise way)
+router.put('/:id', async (req, res) => {
+    const userExist = await User.findById(req.body.id);
+    let newPassword;
+    if(req.body.password){
+        newPassword = bcrypt.hashSync(req.body.password, 10);
+    }else {
+        newPassword = userExist.passwordHash;
+    }
+    //
+    const user = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+            name: req.body.name,
+            email: req.body.email,
+            passwordHash: newPassword,
+            phone: req.body.phone,
+            adress: req.body.adress,
+            city: req.body.city,
+            isAdmin: req.body.isAdmin,
+        }, {new: true}
+    )
+
+    if(!user)
+        res.status(500).send('User can not be updated')
+    
+    res.send(user);
+})
+
 
 module.exports = router;
