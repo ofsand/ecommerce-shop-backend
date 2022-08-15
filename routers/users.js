@@ -3,6 +3,7 @@ const { User } = require("../models/user");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const secret = process.env.secret;
 
 //Get all users
 router.get('/', async (req, res) => {
@@ -87,7 +88,7 @@ router.post('/login', async (req, res) => {
             {
                 userId: user.id
             },
-            'secret',
+            secret,
             {expiresIn: '1d'}
         )
         return res.status(200).send({user: user.email, token})
