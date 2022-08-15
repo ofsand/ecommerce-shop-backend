@@ -90,8 +90,9 @@ router.post('/login', async (req, res) => {
             'secret'
         )
         return res.status(200).send({user: user.email, token})
+    }else{
+        return res.status(400).send('Password Wrong !');
     }
-    return res.status(200).send(user);
 })
 
 
