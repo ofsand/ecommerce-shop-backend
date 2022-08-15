@@ -3,7 +3,8 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+require('dotenv/config');
+const authJwt = require('./helpers/jwt')
 
 require('dotenv/config');
 
@@ -12,12 +13,13 @@ const api = process.env.API_URL;
 //import Routers
 const productRouter = require('./routers/products');
 const categoryRouter = require('./routers/categories');
-//const userRouter = require('./routers/users');
+const userRouter = require('./routers/users');
 //const reviewRouter = require('./routers/reviews');
 
 //
 app.use(cors());
 app.options('*', cors());
+app.use(authJwt);
 
 //Middleware
 app.use(express.json());
@@ -26,7 +28,7 @@ app.use(morgan('tiny'));
 //Router
 app.use(`${api}/products`, productRouter);
 app.use(`${api}/categories`, categoryRouter);
-//app.use(`${api}/user`, userRouter);
+app.use(`${api}/users`, userRouter);
 //app.use(`${api}/review`, reviewRouter);
 
 
