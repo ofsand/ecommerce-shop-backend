@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const jwt = require('jsonwebtoken');
+
 
 const userSchema = mongoose.Schema({
     name: {
@@ -29,7 +31,13 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         required: true
     }
-})
+});
+
+//Token Generation
+userSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign({ id: this._id }, process.env.secret);
+    return token;
+};
 
 //changing _id to id (removing the underscore) Using Virtuals
 userSchema.virtual('id').get(function () {
