@@ -8,7 +8,7 @@ const secret = process.env.secret;
 
 
 //Get all users
-router.get('/', auth(),  async (req, res) => {
+router.get('/', auth("customer:read"),  async (req, res) => {
     const usersList = await User.find().select('-passwordHash');
 
     if(!usersList) {

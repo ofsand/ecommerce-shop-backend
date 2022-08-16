@@ -35,7 +35,12 @@ const userSchema = mongoose.Schema({
 
 //Token Generation
 userSchema.methods.generateAuthToken = function () {
-    const token = jwt.sign({ id: this._id }, process.env.secret);
+    const payLoad = {
+        id: this._id,
+        scopes: ["customer:create", "customer:read"]
+    };
+
+    const token = jwt.sign(payLoad, process.env.secret);
     return token;
 };
 
