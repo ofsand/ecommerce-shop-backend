@@ -21,10 +21,10 @@ const storage = multer.diskStorage({
         if(isValid) {
             uploadError = null
         }
-      cb(uploadError, '/public/uploads')
+      cb(uploadError, 'public/uploads')
     },
     filename: function (req, file, cb) {
-      const fileName = file.originalname.split(' ').join('-') //  or replace(' ', '-')
+      const fileName = file.originalname.replace(' ', '-') //or  split(' ').join('-') 
       const extension = FILE_TYPE_PATH[file.mimetype]
       cb(null, `${fileName}-${Date.now()}.${extension}`);
     }
@@ -181,7 +181,7 @@ router.get(`/get/featured/:count`, async (req, res) => {
     });
 })
 
-
+//Update Product with new images
 router.put('/gallery-images/:id', uploadOptions.array('images', 10), async (req, res) => {
     if (!mongoose.isValidObjectId(req.params.id)) {
         return res.status(400).send('Invalid Product Id');

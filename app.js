@@ -16,6 +16,7 @@ connection();
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
+//app.use("/public/uploads", express.static(__dirname));
 //app.use(auth("customer:read"));
 
 
