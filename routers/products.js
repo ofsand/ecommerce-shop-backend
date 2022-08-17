@@ -72,8 +72,7 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) => {
         name: req.body.name,
         description: req.body.description,
         richDescription: req.body.richDescription,
-        image: `${basePath}${fileName}`,
-        images: req.body.images,
+        image: `${basePath}${fileName}`, // "http://localhost:3000/public/upload/image-2323232"
         brand: req.body.brand,
         price: req.body.price,
         category: req.body.category,
@@ -95,7 +94,7 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) => {
 
 //Update product
 //We use here isvalidObjectId to catch Error of not existing Id (this is an alternative way of catch in the promise way)
-router.put('/:id', async (req, res) => {
+router.put('/:id', uploadOptions.single('image'), async (req, res) => {
     if(!mongoose.isValidObjectId(req.params.id)) {
         res.status(400).send('Invalid Product ID')
     }
@@ -103,15 +102,28 @@ router.put('/:id', async (req, res) => {
     if(!category)
          return res.status(400).send('Invalid Category')
 
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(400).send('Invalid Product!');
+     
+    const file = req.file;
+    let imagepath;
+     
+    if (file) {
+        const fileName = file.filename;
+        const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+        imagepath = `${basePath}${fileName}`;
+    } else {
+        imagepath = product.image;
+    }
+
     //
-    const product = await Product.findByIdAndUpdate(
+    const updatedProduct = await Product.findByIdAndUpdate(
         req.params.id,
         {
         name: req.body.name,
         description: req.body.description,
         richDescription: req.body.richDescription,
-        image: req.body.image,
-        images: req.body.images,
+        image: imagepath,
         brand: req.body.brand,
         price: req.body.price,
         category: req.body.category,
@@ -123,10 +135,10 @@ router.put('/:id', async (req, res) => {
         }, {new: true}
     )
 
-    if(!product)
+    if(!updatedProduct)
         res.status(500).send('Product can not be updated')
     
-    res.send(product);
+    res.send(updatedProduct);
 })
 
 //Delete product
@@ -168,5 +180,34 @@ router.get(`/get/featured/:count`, async (req, res) => {
         products
     });
 })
+
+
+router.put('/gallery-images/:id', uploadOptions.array('images', 10), async (req, res) => {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(400).send('Invalid Product Id');
+    }
+    const files = req.files;
+    let imagesPaths = [];
+    const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+
+    if (files) {
+        files.map((file) => {
+            imagesPaths.push(`${basePath}${file.filename}`);
+        });
+    }
+
+    const product = await Product.findByIdAndUpdate(
+        req.params.id,
+        {
+            images: imagesPaths
+        },
+        { new: true }
+    );
+
+    if (!product) return res.status(500).send('the gallery cannot be updated!');
+
+    res.send(product);
+});
+
 
 module.exports = router;
