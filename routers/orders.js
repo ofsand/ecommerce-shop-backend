@@ -17,7 +17,13 @@ router.get(`/`, async (req, res) => {
 //Get order by Id
 router.get(`/:id`, async (req, res) => {
     //Select is used to specify only some attributes!
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id)
+    .populate('user', 'name')
+    .populate({
+        path: 'orderItems', populate: {
+        path: 'product', populate: 'category'}
+    });
+
     if(!order) {
         res.status(500).json({success: false})
     }
@@ -129,6 +135,21 @@ router.get(`/get/count`, async (req, res) => {
     });
 })
 
+//Get User Orders
+router.get(`/get/userorders/:userid`, async (req, res) => {
+    //Select is used to specify only some attributes!
+    const userOrderList = await Order.find({user: req.params.userid})
+    .populate('user', 'name')
+    .populate({
+        path: 'orderItems', populate: {
+        path: 'product', populate: 'category'}
+    });
+
+    if(!userOrderList) {
+        res.status(500).json({success: false})
+    }
+    res.send(userOrderList);
+})
 
 
 module.exports = router;
