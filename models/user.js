@@ -40,7 +40,7 @@ userSchema.methods.generateAuthToken = function () {
         scopes: ["customer:create", "customer:read"]
     };
 
-    const token = jwt.sign(payLoad, process.env.secret);
+    const token = jwt.sign(payLoad, process.env.secret, {expiresIn: "1d"});
     return token;
 };
 

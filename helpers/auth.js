@@ -44,5 +44,6 @@ module.exports = (credentials = []) => {
             res.status(400).send("Invalid token");
         }
         */
-    };
+        }
+
 };

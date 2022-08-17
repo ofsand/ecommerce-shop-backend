@@ -7,15 +7,19 @@ const bodyParser = require('body-parser');
 const secret = process.env.secret;
 const connection = require('./helpers/db');
 require('dotenv/config');
+const auth = require("./helpers/auth");
 
+const api = process.env.API_URL;
 
 //Middleware
 connection();
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
+//app.use(auth("customer:read"));
 
-const api = process.env.API_URL;
+
+
 //import Routers
 const productRouter = require('./routers/products');
 const categoryRouter = require('./routers/categories');
