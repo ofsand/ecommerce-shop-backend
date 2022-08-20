@@ -13,11 +13,11 @@ const categorySchema = mongoose.Schema({
 })
 
 //changing _id to id (removing the underscore) Using Virtuals
-productSchema.virtual('id').get(function () {
+categorySchema.virtual('id').get(function () {
     return this._id.toHexString();
 });
 
-productSchema.set('toJSON', {
+categorySchema.set('toJSON', {
     virtuals: true
 });
 
