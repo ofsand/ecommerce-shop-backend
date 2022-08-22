@@ -3,11 +3,12 @@ const mongoose = require('mongoose');
 const productSchema = mongoose.Schema({
     name: { 
         type: String,
-        required :false
+        required :true
     },
     description: { 
         type: String,
-        required :false
+        required: true,
+        required :true
     },
     richDescription: { 
         type: String,
@@ -15,6 +16,7 @@ const productSchema = mongoose.Schema({
     },
     image: { 
         type: String,
+        required: true,
         default: ''
     },
     images: [{ 
@@ -27,16 +29,17 @@ const productSchema = mongoose.Schema({
     },
     price: {
         type: Number,
+        required: true,
         default: 0
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
-        required: false
+        required: true
     },
     countInStock: {
         type: Number,
-        required: false,
+        required: true,
         min: 0,
         max: 255
     },

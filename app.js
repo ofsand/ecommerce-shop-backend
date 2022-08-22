@@ -1,4 +1,5 @@
 const express = require('express');
+const { join } = require('path');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
@@ -16,7 +17,13 @@ connection();
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
-//app.use("/public/uploads", express.static(__dirname));
+//app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
+//app.use(express.static(__dirname + 'public/uploads'));
+//app.use('/public/uploads',express.static(__dirname + '/public/uploads'));
+//app.use(express.static('/public/uploads'))
+app.use('/public/uploads', express.static(join(__dirname, '/public/uploads')));
+
+//app.use(express.static(join(__dirname, '/public/uploads')));
 //app.use(auth("customer:read"));
 
 

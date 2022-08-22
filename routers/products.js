@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
         if(isValid) {
             uploadError = null
         }
-      cb(uploadError, 'public/uploads')
+      cb(uploadError, 'public/uploads/')
     },
     filename: function (req, file, cb) {
       const fileName = file.originalname.replace(' ', '-') //or  split(' ').join('-') 
@@ -39,7 +39,7 @@ router.get(`/`, async (req, res) => {
         categoryFilter = {category: req.query.categories.split(',')};
     }
     //Select is used to specify only some attributes!
-    const productList = await Product.find(categoryFilter).select('name image _id').populate('category');
+    const productList = await Product.find(categoryFilter).select().populate('category');
     if(!productList) {
         res.status(500).json({success: false})
     }
@@ -66,7 +66,7 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) => {
    if(!file) return res.status(400).send('No image in the request');
 
     const fileName = req.file.filename;
-    const basePath = `${req.protocol}://${req.get('host')}/public/uploads`;
+    const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
 
     let product = new Product({
         name: req.body.name,
