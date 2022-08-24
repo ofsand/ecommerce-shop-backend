@@ -34,7 +34,7 @@ router.post(`/`, async (req, res) => {
          email: req.body.email,
          passwordHash: bcrypt.hashSync(req.body.password, 10),
          phone: req.body.phone,
-         adress: req.body.adress,
+         address: req.body.address,
          city: req.body.city,
          isAdmin: req.body.isAdmin,
      })
@@ -66,7 +66,7 @@ router.put('/:id', async (req, res) => {
             email: req.body.email,
             passwordHash: newPassword,
             phone: req.body.phone,
-            adress: req.body.adress,
+            address: req.body.address,
             city: req.body.city,
             isAdmin: req.body.isAdmin,
         }, {new: true}
