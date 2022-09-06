@@ -28,7 +28,8 @@ const userSchema = mongoose.Schema({
     },
     isAdmin: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     }
 });
 
@@ -36,7 +37,7 @@ const userSchema = mongoose.Schema({
 userSchema.methods.generateAuthToken = function () {
     const payLoad = {
         id: this._id,
-        scopes: ["customer:create", "customer:read"]
+        isAdmin: this.isAdmin
     };
 
     const token = jwt.sign(payLoad, process.env.secret, {expiresIn: "1d"});

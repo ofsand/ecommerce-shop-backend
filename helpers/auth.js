@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (credentials = []) => {
-    return (req, res, next) => {
+    return (err, req, res, next) => {
         //Allow for a String or Array
         if(typeof credentials === "string") {
             credentials = [credentials];
@@ -44,6 +44,6 @@ module.exports = (credentials = []) => {
             res.status(400).send("Invalid token");
         }
         */
-        }
+    }
 
 };

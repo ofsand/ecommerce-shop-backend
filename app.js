@@ -9,6 +9,9 @@ const secret = process.env.secret;
 const connection = require('./helpers/db');
 require('dotenv/config');
 const auth = require("./helpers/auth");
+const errorHandler = require('./helpers/error-handler')
+
+const authJwt = require('./helpers/jwt');
 
 const api = process.env.API_URL;
 
@@ -17,6 +20,8 @@ connection();
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
+app.use(authJwt());
+app.use(errorHandler);
 //app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 //app.use(express.static(__dirname + 'public/uploads'));
 //app.use('/public/uploads',express.static(__dirname + '/public/uploads'));
