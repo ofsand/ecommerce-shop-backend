@@ -87,7 +87,7 @@ router.post('/login', async (req, res) => {
 
     if(user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
         const token = user.generateAuthToken();
-        return res.status(200).send({user: user.email, token})
+        return res.status(200).json({user: user.email , token: token})
     }else{
         return res.status(400).send('Password Wrong !');
     }
