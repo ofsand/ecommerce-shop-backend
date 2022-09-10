@@ -9,8 +9,10 @@ function authJwt() {
         isRevoked: isRevoked
     }).unless({
         path: [
-            {url: /\/api\/v1\/products(.*)/ , methods: ['GET', 'OPTIONS'] },
-            {url: /\/api\/v1\/categories(.*)/ , methods: ['GET', 'OPTIONS'] },
+            {url: /\/api\/v1\/products(.*)/ },
+            {url: /\/api\/v1\/categories(.*)/ },
+            { url: /\/api\/v1\/users(.*)/ },
+            { url: /\/api\/v1\/orders(.*)/ },
             `${api}/users/login`,
             `${api}/users/register`,
         ]

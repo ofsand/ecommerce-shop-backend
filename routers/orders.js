@@ -140,9 +140,13 @@ router.get(`/get/userorders/:userid`, async (req, res) => {
     //Select is used to specify only some attributes!
     const userOrderList = await Order.find({user: req.params.userid})
     .populate('user', 'name')
+    /*
     .populate({
         path: 'orderItems', populate: {
         path: 'product', populate: 'category'}
+        */
+    .populate({
+        path: 'orderItems'
     });
 
     if(!userOrderList) {

@@ -78,7 +78,24 @@ router.put('/:id', async (req, res) => {
     res.send(user);
 })
 
+//Admin login
 router.post('/login', async (req, res) => {
+    const user = await User.findOne({email: req.body.email})
+
+    if(!user){
+        return res.status(400).send('The user is not found');
+    }
+
+    if(user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
+        const token = user.generateAuthToken();
+        return res.status(200).json({user: user.email , token: token})
+    }else{
+        return res.status(400).send('Password Wrong !');
+    }
+})
+
+//User Login
+router.post('/user-login', async (req, res) => {
     const user = await User.findOne({email: req.body.email})
 
     if(!user){
