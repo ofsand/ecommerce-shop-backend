@@ -37,7 +37,7 @@ app.use(errorHandler);
 const productRouter = require('./routers/products');
 const categoryRouter = require('./routers/categories');
 const userRouter = require('./routers/users');
-//const reviewRouter = require('./routers/reviews');
+const reviewsRouter = require('./routers/reviews');
 const ordersRouter = require('./routers/orders');
 const { json } = require('express');
 
@@ -51,6 +51,8 @@ app.use(`${api}/products`, productRouter);
 app.use(`${api}/categories`, categoryRouter);
 app.use(`${api}/users`, userRouter);
 app.use(`${api}/orders`, ordersRouter);
+app.use(`${api}/reviews`, reviewsRouter);
+
 //app.use(`${api}/review`, reviewRouter);
 
 

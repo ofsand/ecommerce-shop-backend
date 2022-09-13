@@ -1,6 +1,35 @@
 const { Category } = require('../models/category');
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+
+//mimetypes
+const FILE_TYPE_PATH = {
+    'image/png': 'png',
+    'image/jpeg': 'jpeg',
+    'image/jpg': 'jpg'
+}
+
+//Images Upload
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const isValid = FILE_TYPE_PATH[file.mimetype];
+        let uploadError = new Error('Invalid image type');
+
+        if(isValid) {
+            uploadError = null
+        }
+      cb(uploadError, 'public/uploads/')
+    },
+    filename: function (req, file, cb) {
+      const fileName = file.originalname.replace(' ', '-') //or  split(' ').join('-') 
+      const extension = FILE_TYPE_PATH[file.mimetype]
+      cb(null, `${fileName}-${Date.now()}.${extension}`);
+    }
+  })
+  
+  const uploadOptions = multer({ storage: storage })
+
 
 // Get all Categories
 router.get('/', async (req, res) => {
@@ -22,11 +51,17 @@ router.get('/:id', async (req, res) => {
 })
 
 //Create category
-router.post('/', async (req, res) => {
+router.post('/', uploadOptions.single('image'), async (req, res) => {
+
+    const file = req.file;
+    if(!file) return res.status(400).send('No image in the request');
+ 
+     const fileName = req.file.filename;
+     const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+
     let category = new Category ({
         name: req.body.name,
-        icon: req.body.icon,
-        color: req.body.color
+        image: `${basePath}${fileName}`
     })
     category = await category.save();
 
@@ -38,20 +73,37 @@ router.post('/', async (req, res) => {
 })
 
 //Update Category
-router.put('/:id', async (req, res) => {
-    const category = await Category.findByIdAndUpdate(
+router.put('/:id',uploadOptions.single('image'),  async (req, res) => {
+    if(!mongoose.isValidObjectId(req.params.id)) {
+        res.status(400).send('Invalid Product ID')
+    }
+
+    const category = await Category.findById(req.params.id);
+    if (!category) return res.status(400).send('Invalid Product!');
+     
+    const file = req.file;
+    let imagepath;
+     
+    if (file) {
+        const fileName = file.filename;
+        const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+        imagepath = `${basePath}${fileName}`;
+    } else {
+        imagepath = category.image;
+    }
+
+    const updatedCategory = await Product.findByIdAndUpdate(
         req.params.id,
         {
             name: req.body.name,
-            icon: req.body.icon,
-            color: req.body.color
+            image: imagepath
         }, {new: true}
     )
 
-    if(!category)
+    if(!updatedCategory)
         res.status(404).send('Category can not be updated')
     
-    res.send(category);
+    res.send(updatedCategory);
 })
 
 //Delete category

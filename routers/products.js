@@ -4,6 +4,7 @@ const { Product } = require('../models/product');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
+const { Review } = require('../models/review');
 
 //mimetypes
 const FILE_TYPE_PATH = {
@@ -48,7 +49,7 @@ router.get(`/`, async (req, res) => {
 
 //Get a product
 router.get('/:id', async (req, res) => {
-    const product = await Product.findById(req.params.id).populate('category');
+    const product = await Product.findById(req.params.id).populate('category').populate('review');
 
     if(!product) {
         res.status(500).json({success: false});
@@ -206,6 +207,27 @@ router.put('/gallery-images/:id', uploadOptions.array('images', 10), async (req,
 
     res.send(product);
 });
+
+// Create reviews
+router.post('/:id/reviews', async (req, res) => {
+    if(!mongoose.isValidObjectId(req.params.id)) {
+        res.status(400).send('Invalid Product ID')
+    } else {
+            let review = new Review({
+            rating: req.body.rating,
+            reviewer: req.body.reviewer,
+            product: req.params.id,
+            user: req.body.user,
+            text: req.body.text,
+        })
+        review = await review.save();
+        
+        if(!review)
+            return res.status(400).send('the review cannot be created!')
+            res.send(review);
+        }
+})
+
 
 
 module.exports = router;

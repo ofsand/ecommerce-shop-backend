@@ -56,6 +56,7 @@ router.post('/', async (req,res)=>{
     let order = new Order({
         orderItems: orderItemsIdsResolved,
         shippingAddress: req.body.shippingAddress,
+        name: req.body.name,
         city: req.body.city,
         zipCode: req.body.zipCode,
         phone: req.body.phone,
@@ -139,15 +140,12 @@ router.get(`/get/count`, async (req, res) => {
 router.get(`/get/userorders/:userid`, async (req, res) => {
     //Select is used to specify only some attributes!
     const userOrderList = await Order.find({user: req.params.userid})
-    .populate('user', 'name')
-    /*
+    .populate('user')
+
     .populate({
         path: 'orderItems', populate: {
         path: 'product', populate: 'category'}
-        */
-    .populate({
-        path: 'orderItems'
-    });
+    }).sort({'dateOrdered' : -1 });;
 
     if(!userOrderList) {
         res.status(500).json({success: false})
