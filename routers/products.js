@@ -49,7 +49,7 @@ router.get(`/`, async (req, res) => {
 
 //Get a product
 router.get('/:id', async (req, res) => {
-    const product = await Product.findById(req.params.id).populate('category').populate('review');
+    const product = await Product.findById(req.params.id).populate('category');
 
     if(!product) {
         res.status(500).json({success: false});
@@ -209,7 +209,7 @@ router.put('/gallery-images/:id', uploadOptions.array('images', 10), async (req,
 });
 
 // Create reviews
-router.post('/:id/reviews', async (req, res) => {
+router.post('/:id/review', async (req, res) => {
     if(!mongoose.isValidObjectId(req.params.id)) {
         res.status(400).send('Invalid Product ID')
     } else {
@@ -227,6 +227,7 @@ router.post('/:id/reviews', async (req, res) => {
             res.send(review);
         }
 })
+
 
 
 
