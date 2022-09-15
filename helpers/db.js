@@ -2,10 +2,10 @@
 const mongoose = require('mongoose');
 
 module.exports = async () => {
-    mongoose.connect('mongodb+srv://ofsand:dnasfo@cluster0.tmpxvq6.mongodb.net/?retryWrites=true&w=majority', {
+    mongoose.connect(process.env.CONNECTION_STRING, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        dbName: 'eshop_db'
+        dbName: process.env.DB_NAME
     })
     .then(() => {
         console.log('Database is Connected');

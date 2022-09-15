@@ -9,7 +9,7 @@ const secret = process.env.secret;
 const connection = require('./helpers/db');
 require('dotenv/config');
 const auth = require("./helpers/auth");
-const errorHandler = require('./helpers/error-handler')
+const errorHandler = require('./helpers/error-handlerjs')
 
 const authJwt = require('./helpers/jwt');
 
