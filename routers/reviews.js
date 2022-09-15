@@ -5,8 +5,12 @@ const router = express.Router();
 
 //Get all reviews
 router.get(`/`, async (req, res) => {
+    let productFilter = {};
+    if(req.query.product) {
+        productFilter = {product: req.query.product};
+    }
     //Select is used to specify only some attributes!
-    const reviewList = await Review.find().populate('user', 'name').sort({'created_on' : -1 });
+    const reviewList = await Review.find(productFilter).select().populate('user', 'name').sort({'created_on' : -1 });
     if(!reviewList) {
         res.status(500).json({success: false})
     }
