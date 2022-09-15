@@ -1,6 +1,7 @@
 const { Category } = require('../models/category');
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const multer = require('multer');
 
 //mimetypes
@@ -73,13 +74,13 @@ router.post('/', uploadOptions.single('image'), async (req, res) => {
 })
 
 //Update Category
-router.put('/:id',uploadOptions.single('image'),  async (req, res) => {
+router.put('/:id', uploadOptions.single('image'),  async (req, res) => {
     if(!mongoose.isValidObjectId(req.params.id)) {
-        res.status(400).send('Invalid Product ID')
+        res.status(400).send('Invalid Category ID')
     }
 
     const category = await Category.findById(req.params.id);
-    if (!category) return res.status(400).send('Invalid Product!');
+    if (!category) return res.status(400).send('Invalid Category!');
      
     const file = req.file;
     let imagepath;
@@ -92,7 +93,7 @@ router.put('/:id',uploadOptions.single('image'),  async (req, res) => {
         imagepath = category.image;
     }
 
-    const updatedCategory = await Product.findByIdAndUpdate(
+    const updatedCategory = await Category.findByIdAndUpdate(
         req.params.id,
         {
             name: req.body.name,
@@ -101,7 +102,7 @@ router.put('/:id',uploadOptions.single('image'),  async (req, res) => {
     )
 
     if(!updatedCategory)
-        res.status(404).send('Category can not be updated')
+        res.status(500).send('Category can not be updated')
     
     res.send(updatedCategory);
 })
