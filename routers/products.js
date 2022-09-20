@@ -162,6 +162,7 @@ router.get(`/get/count`, async (req, res) => {
     const productCount = await Product.countDocuments();
 
     if(!productCount) {
+        res.send({ productCount: 0 });
         res.status(500).json({success: false});
     }
     res.send({
