@@ -119,7 +119,7 @@ router.get('/get/totalsales', async (req, res)=> {
 
     if(!totalSales) {
         res.send({ totalsales: 0 });
-        return res.status(400).send('The order sales cannot be generated')
+        //return res.status(400).send('The order sales cannot be generated')
     }
 
     res.send({totalsales: totalSales.pop().totalsales})
@@ -131,7 +131,7 @@ router.get(`/get/count`, async (req, res) => {
 
     if(!orderCount) {
         res.send({ orderCount: 0 });
-        res.status(500).json({success: false});
+        //res.status(500).json({success: false});
     }
     res.send({
         orderCount: orderCount
