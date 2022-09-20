@@ -14,6 +14,7 @@ function authJwt() {
             { url: /\/api\/v1\/users(.*)/ },
             { url: /\/api\/v1\/orders(.*)/ },
             { url: /\/api\/v1\/reviews(.*)/ },
+            { url: /\/public\/uploads(.*)/ },
             `${api}/users/login`,
         ]
     })
