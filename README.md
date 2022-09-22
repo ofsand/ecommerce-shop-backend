@@ -1,7 +1,7 @@
-## MEAN Stack ecommerce website!
-
- Click to see the <a href="https://github.com/ofsand/Ecommerce-brands-website-frontend-AngularJs-">FRONT END PART REPO</a>
-
+ ## MEAN Stack ecommerce website!
+ 
+ Click to see the <a href="https://github.com/ofsand/ecommerce-shop">FRONT END PART</a>
+ 
 ### Content
 - ##### How to use this project ?
 - ##### Overview
@@ -13,6 +13,8 @@
 - ##### API's testing
 
 ### How to use this project ?
+- Clone the project in your local
+
 - make sure you clone the project from the stable-main branch, then install node modules with npm:
 
 ```sh
@@ -21,11 +23,9 @@ npm install
 - due to the use of monorepo, the shop and admin app are devided, you can run each of them with the following commands:
 
 ```sh
-nx serve eshop
+npm start
 ```
-```sh
-nx serve admin
-```
+
 - Don't hesitate to fork the project and add more functionnalities and send a pull request on the project
 
 ### Overview
@@ -66,7 +66,7 @@ In this project you can find, the following:
 TO BE NOTED:  the admin can not have access to the shop and buy products as an admin, it is denied from this functionnality, ans vice versa !
 ### Architecture
 The Project's architecture is based on the MonoRepo NX Architecture:
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="150"></p>
+<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" height="150"></p>
 One of the best things about NX is the ability to generate modules, services Libraries etc.. without CLI command.
 
 ##### Quick Start & Documentation Of NX
@@ -77,12 +77,11 @@ One of the best things about NX is the ability to generate modules, services Lib
 The important things I did about the architecture of the project is avoiding the traditional way of Angular where every TS file is followed by its own CSS or SCSS file, instead i've created a global folder called Styles and placed all SCSS files inside with the same hierarchy, also i avoided generating Test file because i was focusing just on Developement without testing.
  Here is a clear idea about the architecture of the project:
  
-<a href="https://postimg.cc/ppYx0kbJ" target="_blank"><img src="https://i.postimg.cc/ppYx0kbJ/11.jpg" alt="11"/></a>
+<a href="https://files.fm/u/wb8k2t7ur#/view/11.JPG"><img src="https://files.fm/thumb_show.php?i=jyy7s77uj" height="400"></a>
 
-<a href="https://postimg.cc/210YY65q" target="_blank"><img src="https://i.postimg.cc/210YY65q/22.jpg" alt="22"/></a>
+<a href="https://files.fm/u/ypphq9mn7#/view/22.JPG"><img src="https://files.fm/thumb_show.php?i=5usa3z9v3" height="400"></a>
 
-<a href="https://postimg.cc/8F3VF0MN" target="_blank"><img src="https://i.postimg.cc/8F3VF0MN/333.jpg" alt="333"  width="200"/></a>
-
+<a href="https://files.fm/u/wspvcqdyv#/view/333.JPG"><img src="https://files.fm/thumb_show.php?i=jrh7qemwd" height="400"></a>
 
 ### Frontend
 In the front end part I've used
@@ -106,11 +105,10 @@ http://primefaces.org/primeng/setup
 ### API’s testing
 For API Testing, Ive user the most famous Postman, and I've organized my api's requests as follows:
 
-<a href="https://postimg.cc/nsMJhJs3" target="_blank"><img src="https://i.postimg.cc/nsMJhJs3/111.jpg" alt="111" width="200"/></a>
+<a href="https://files.fm/u/cxpekffz4#/view/111.JPG"><img src="https://files.fm/thumb_show.php?i=ge6z8sx7x" height="400"></a>
 
+<a href="https://files.fm/u/gbjja4wvd#/view/222.JPG"><img src="https://files.fm/thumb_show.php?i=vv95b8z9b" height="400"></a>
 
-<a href="https://postimg.cc/BLKf2BBD" target="_blank"><img src="https://i.postimg.cc/BLKf2BBD/222.jpg" alt="222" width="200"/></a>
-
-
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 ##### Take Care, and one last thing, STAY IN YOUR Magic! ✨
