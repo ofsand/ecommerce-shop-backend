@@ -1,6 +1,8 @@
 ## MEAN Stack ecommerce website!
 
  Click to see the <a href="https://github.com/ofsand/ecommerce-shop">FRONT END PART REPO</a>
+ 
+#### NB: The images in this lecture are not clear, Please click on the images to see them clearly
 
 ### Content
 - ##### How to use this project ?
