@@ -24,7 +24,6 @@ npm install
 ```sh
 npm start
 ```
-```sh
 
 <a href="https://files.fm/u/6ch4qr2xt#/view/nx-serve.JPG"><img src="https://files.fm/thumb_show.php?i=qqvteb9xm" height="400"></a>
 
