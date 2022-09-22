@@ -1,6 +1,6 @@
 ## MEAN Stack ecommerce website!
 
- Click to see the <a href="https://github.com/ofsand/Ecommerce-brands-website-frontend-AngularJs-">FRONT END PART REPO</a>
+ Click to see the <a href="https://github.com/ofsand/ecommerce-shop">FRONT END PART REPO</a>
 
 ### Content
 - ##### How to use this project ?
@@ -21,11 +21,11 @@ npm install
 - due to the use of monorepo, the shop and admin app are devided, you can run each of them with the following commands:
 
 ```sh
-nx serve eshop
+npm start
 ```
-```sh
-nx serve admin
-```
+
+- To use the Front end part Please click on FRONT END PART REPO above
+
 - Don't hesitate to fork the project and add more functionnalities and send a pull request on the project
 
 ### Overview
