@@ -13,6 +13,8 @@
 - ##### API's testing
 
 ### How to use this project ?
+- Clone the project in your local
+
 - make sure you clone the project from the stable-main branch, then install node modules with npm:
 
 ```sh
@@ -23,8 +25,6 @@ npm install
 ```sh
 npm start
 ```
-
-- Make sure to use those exact ports Please !
 
 - Don't hesitate to fork the project and add more functionnalities and send a pull request on the project
 
