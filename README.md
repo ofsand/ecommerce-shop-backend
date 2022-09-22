@@ -66,7 +66,9 @@ In this project you can find, the following:
 TO BE NOTED:  the admin can not have access to the shop and buy products as an admin, it is denied from this functionnality, ans vice versa !
 ### Architecture
 The Project's architecture is based on the MonoRepo NX Architecture:
+
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" height="150"></p>
+
 One of the best things about NX is the ability to generate modules, services Libraries etc.. without CLI command.
 
 ##### Quick Start & Documentation Of NX
@@ -109,6 +111,5 @@ For API Testing, Ive user the most famous Postman, and I've organized my api's r
 
 <a href="https://files.fm/u/gbjja4wvd#/view/222.JPG"><img src="https://files.fm/thumb_show.php?i=vv95b8z9b" height="400"></a>
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 ##### Take Care, and one last thing, STAY IN YOUR Magic! ✨
