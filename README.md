@@ -1,7 +1,8 @@
  ## MEAN Stack ecommerce website!
-
- Click to see the <a href="https://github.com/ofsand/ecommerce-shop">FRONT END PART REPO</a>
  
+ Click to see the <a href="https://github.com/ofsand/ecommerce-shop">BACK END PART</a>
+ 
+#### NB: The images in this lecture are not clear, Please click on the images to see them clearly
 
 ### Content
 - ##### How to use this project ?
@@ -25,7 +26,7 @@ npm install
 npm start
 ```
 
-<a href="https://files.fm/u/6ch4qr2xt#/view/nx-serve.JPG"><img src="https://files.fm/thumb_show.php?i=qqvteb9xm" height="400"></a>
+- Make sure to use those exact ports Please !
 
 - Don't hesitate to fork the project and add more functionnalities and send a pull request on the project
 
