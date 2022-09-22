@@ -17,6 +17,16 @@ router.get(`/`, async (req, res) => {
     res.send(reviewList);
 })
 
+//Get Review by id
+router.get('/:id', async (req, res) => {
+    const review = await Review.findById(req.params.id).populate('product');
+
+    if(!review){
+        res.status(500).json({message: 'The review with given id was not found'});
+    }
+    res.status(200).send(review);
+})
+
 //Delete product
 //The promise way allow catching Error of product not found
 router.delete('/:id', (req, res) => {
