@@ -26,7 +26,7 @@ npm install
 npm start
 ```
 
-- Don't hesitate to fork the project and add more functionnalities and send a pull request on the project
+- Don't hesitate to fork the project and add more functionnalities
 
 ### Overview
 First of all my motivations that let me go for this project, and commit every single functionnality, is having a clear idea about how the MEAN stack works and how a Monorepo can affect the organization of my project.
