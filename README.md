@@ -15,7 +15,7 @@
 ### How to use this project ?
 - Clone the project in your local
 
-- make sure you clone the project from the stable-main branch, then install node modules with npm:
+- make sure you clone the project from the main branch, then install node modules with npm:
 
 ```sh
 npm install
